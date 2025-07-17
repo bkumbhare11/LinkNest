@@ -1,12 +1,38 @@
-# React + Vite
+# 🔗 LinkNest
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LinkNest is a modern and responsive link manager app where users can sign in securely and manage their links in categorized form. Built using React + Clerk + Redux with a clean UI powered by shadcn and Magic UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🔐 Secure authentication via **Clerk**
+- ➕ Add, Edit, Delete links
+- 🏷️ Tag-wise filtering (e.g. Work, Personal)
+- 🔍 Search functionality
+- 🌗 Dark & Light theme toggle
+- ⚛️ Redux for global state management
+- 🎨 Modern UI using **shadcn** + **Magic UI**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+
+- React.js (Vite)
+- Redux Toolkit
+- Clerk Authentication
+- Tailwind CSS
+- shadcn/ui
+- Magic UI
+
+---
+
+## 🚀 Getting Started
+
+``bash
+git clone https://github.com/your-username/linknest.git
+cd linknest
+npm install
+npm run dev
+
+Made with ❤️ by Bhavesh Kumbhare
