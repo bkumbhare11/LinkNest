@@ -3,10 +3,12 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setLinks } from "@/redux/linkSlice";
 import LinkCard from "@/components/LinkCard";
+import { useUser } from "@clerk/clerk-react";
 
 import { BlurFade } from "@/components/magicui/blur-fade";
 
 function Favourite() {
+  const { user } = useUser();
   const dispatch = useDispatch();
   const links = useSelector((state) => state.link.linkData);
   let url =
@@ -25,7 +27,9 @@ function Favourite() {
     });
   }, []);
 
-  let favouriteLink = links.filter((link) => link.isFavourite == true);
+  let favouriteLink = links
+    .filter((link) => link.isFavourite == true)
+    .filter((link) => link.createdBy == user.username);
 
   return (
     <>
