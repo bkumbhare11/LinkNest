@@ -1,14 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeProviderContext = createContext({
   theme: "system",
   setTheme: () => {},
+  isMounted: false,
 });
 
 export function ThemeProvider({
@@ -17,45 +12,39 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }) {
-  const [theme, setThemeState] = useState("system");
+  const [theme, setThemeState] = useState(defaultTheme);
+  const [isMounted, setIsMounted] = useState(false);
 
-  // ✅ Apply theme *before* paint (to prevent flicker)
-  useLayoutEffect(() => {
+  useEffect(() => {
     const storedTheme = localStorage.getItem(storageKey) || defaultTheme;
+    setThemeState(storedTheme);
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
 
-    const appliedTheme =
-      storedTheme === "system"
-        ? window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light"
-        : storedTheme;
-
-    root.classList.add(appliedTheme);
-    setThemeState(storedTheme);
-  }, []);
+    if (theme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+      root.classList.add(systemTheme);
+    } else {
+      root.classList.add(theme);
+    }
+  }, [theme]);
 
   const setTheme = (newTheme) => {
     localStorage.setItem(storageKey, newTheme);
     setThemeState(newTheme);
-
-    const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-
-    const appliedTheme =
-      newTheme === "system"
-        ? window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light"
-        : newTheme;
-
-    root.classList.add(appliedTheme);
   };
 
   const value = {
     theme,
     setTheme,
+    isMounted,
   };
 
   return (

@@ -1,11 +1,11 @@
 import { useTheme } from "./ThemeProvider";
-
 import { MdNightlightRound } from "react-icons/md";
-
 import { FaSun } from "react-icons/fa";
 
 function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, isMounted } = useTheme();
+
+  if (!isMounted) return null; // wait until mounted to avoid mismatch
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
