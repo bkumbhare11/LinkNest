@@ -44,21 +44,47 @@ function LinkCard({ link }) {
             duration: 2000,
           });
         }
+      })
+      .catch((err) => {
+        console.log("Error while updating", err);
+        toast.error(
+          "Something went wrong while updating the link. Please try again later!",
+          {
+            style: {
+              backgroundColor: "#ef4444",
+              color: "#fff",
+            },
+          }
+        );
       });
   }
 
   function handleDelete(id) {
-    axios.delete(`${url}link/${id}.json`).then(() => {
-      dispatch(deleteLink(id));
-      console.log("Link Deleted");
-      toast.error("Link Deleted Successfully", {
-        style: {
-          background: "#ef4444",
-          color: "#ffffff",
-        },
-        duration: 2000,
+    axios
+      .delete(`${url}link/${id}.json`)
+      .then(() => {
+        dispatch(deleteLink(id));
+        console.log("Link Deleted");
+        toast.error("Link Deleted Successfully", {
+          style: {
+            background: "#ef4444",
+            color: "#ffffff",
+          },
+          duration: 2000,
+        });
+      })
+      .catch((err) => {
+        console.log("Error while deleting", err);
+        toast.error(
+          "Something went wrong while deleting the link. Please try again later!",
+          {
+            style: {
+              backgroundColor: "#ef4444",
+              color: "#fff",
+            },
+          }
+        );
       });
-    });
   }
 
   return (

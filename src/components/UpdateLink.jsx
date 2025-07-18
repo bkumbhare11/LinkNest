@@ -78,6 +78,18 @@ function UpdateLink({ link }) {
           icon: "📝",
           duration: 2000,
         });
+      })
+      .catch((err) => {
+        console.log("Error while updating", err);
+        toast.error(
+          "Something went wrong while updating the link. Please try again later!",
+          {
+            style: {
+              backgroundColor: "#ef4444",
+              color: "#fff",
+            },
+          }
+        );
       });
   }
 

@@ -42,6 +42,15 @@ function Links() {
       })
       .catch((err) => {
         console.log("Error while fetching: ", err);
+        toast.error(
+          "Something went wrong while geeting the links. Please try again later!",
+          {
+            style: {
+              backgroundColor: "#ef4444",
+              color: "#fff",
+            },
+          }
+        );
       });
   }, []);
 

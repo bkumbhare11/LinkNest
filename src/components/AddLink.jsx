@@ -40,6 +40,15 @@ function AddLink() {
   let title = useRef();
   let description = useRef();
 
+  function isValidURL() {
+    try {
+      new URL(linkUrl);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   function handleClick() {
     // console.log(link.current.value);
     // console.log(title.current.value);
@@ -81,11 +90,21 @@ function AddLink() {
           link.url.toLowerCase() == linkUrl.toLowerCase()
       );
 
+    if (!isValidURL(linkUrl)) {
+      toast.error("Invalid URL! Please enter a valid link ", {
+        style: {
+          backgroundColor: "#ef4444",
+          color: "#ffffff",
+        },
+      });
+      return;
+    }
+
     if (isDuplicate) {
       toast("Url or Title already exists", {
         style: {
           background: "#f97316", // Tailwind: orange-500
-          color: "#ffffff",
+          color: "#fff",
         },
       });
     } else {
@@ -118,7 +137,7 @@ function AddLink() {
 
           toast.success("Link Added Successfully", {
             style: {
-              background: "#22c55e", // Tailwind: green-500
+              background: "#22c55e",
               color: "#ffffff",
             },
             duration: 2000,
@@ -129,6 +148,15 @@ function AddLink() {
         })
         .catch((err) => {
           console.log("Error while posting link: ", err);
+          toast.error(
+            "Something went wrong while saving the link. Please try again later!",
+            {
+              style: {
+                backgroundColor: "#ef4444",
+                color: "#fff",
+              },
+            }
+          );
         });
     }
   }
@@ -159,7 +187,7 @@ function AddLink() {
                 <Input
                   id="name-1"
                   name="link"
-                  placeholder="paste your favourite link"
+                  placeholder="https://example.com"
                   ref={link}
                 />
               </div>
@@ -168,7 +196,7 @@ function AddLink() {
                 <Input
                   id="title"
                   name="title"
-                  placeholder="give your link a title"
+                  placeholder="Give your link a title"
                   ref={title}
                 />
               </div>
@@ -176,7 +204,7 @@ function AddLink() {
               <div className="grid gap-3">
                 <Label htmlFor="description">Description</Label>
                 <Textarea
-                  placeholder="Type your message here."
+                  placeholder="Add description for your link."
                   ref={description}
                 />
               </div>
