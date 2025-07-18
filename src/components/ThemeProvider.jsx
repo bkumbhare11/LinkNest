@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 const ThemeProviderContext = createContext({
   theme: "system",
@@ -11,28 +17,40 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }) {
-  const [theme, setThemeState] = useState(() => {
-    return localStorage.getItem(storageKey) || defaultTheme;
-  });
+  const [theme, setThemeState] = useState("system");
 
-  useEffect(() => {
+  // ✅ Apply theme *before* paint (to prevent flicker)
+  useLayoutEffect(() => {
+    const storedTheme = localStorage.getItem(storageKey) || defaultTheme;
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
 
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-      root.classList.add(systemTheme);
-    } else {
-      root.classList.add(theme);
-    }
-  }, [theme]);
+    const appliedTheme =
+      storedTheme === "system"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+        : storedTheme;
+
+    root.classList.add(appliedTheme);
+    setThemeState(storedTheme);
+  }, []);
 
   const setTheme = (newTheme) => {
     localStorage.setItem(storageKey, newTheme);
     setThemeState(newTheme);
+
+    const root = window.document.documentElement;
+    root.classList.remove("light", "dark");
+
+    const appliedTheme =
+      newTheme === "system"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+        : newTheme;
+
+    root.classList.add(appliedTheme);
   };
 
   const value = {
