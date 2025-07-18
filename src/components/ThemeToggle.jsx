@@ -4,9 +4,6 @@ import { FaSun } from "react-icons/fa";
 
 function ThemeToggle() {
   const { theme, setTheme, isMounted } = useTheme();
-
-  
-
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
