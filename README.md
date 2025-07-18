@@ -38,6 +38,6 @@ npm run dev
 ## 🚀 Live Demo
 
 Check out the live version here:  
-👉 [LinkNest - Live](https://link-nest-gilt.vercel.app/)
+👉 [LinkNest - Live](https://link-nest-sigma.vercel.app/)
 
 Made with ❤️ by Bhavesh Kumbhare
