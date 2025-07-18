@@ -17,12 +17,10 @@ function Intro() {
   return (
     <>
       <div className="relative min-h-screen overflow-hidden">
-        {/* Theme Toggle fixed top-right */}
         <p className="fixed top-0 right-0 mx-5 my-1 z-20">
           <ThemeToggle />
         </p>
 
-        {/* Background Particles */}
         <Particles
           className="absolute inset-0 -z-10"
           quantity={150}
@@ -30,7 +28,6 @@ function Intro() {
           color={theme === "dark" ? "#ffffff" : "#222222"}
         />
 
-        {/* Foreground Content */}
         <div className="max-w-5xl sm:mx-auto my-10 mx-2 flex flex-col items-center p-2 relative z-10">
           <img
             src={theme === "dark" ? lightlogo : darklogo}
