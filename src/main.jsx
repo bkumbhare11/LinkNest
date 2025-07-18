@@ -16,7 +16,7 @@ if (!PUBLISHABLE_KEY || !FRONTEND_API) {
 }
 
 createRoot(document.getElementById("root")).render(
-  <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+  <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <BrowserRouter>
       <ClerkProvider
         publishableKey={PUBLISHABLE_KEY}
