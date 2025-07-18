@@ -35,4 +35,9 @@ cd linknest
 npm install
 npm run dev
 
+## 🚀 Live Demo
+
+Check out the live version here:  
+👉 [LinkNest - Live](https://link-nest-gilt.vercel.app/)
+
 Made with ❤️ by Bhavesh Kumbhare
