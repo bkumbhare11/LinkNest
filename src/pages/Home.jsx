@@ -77,16 +77,16 @@ function Links() {
         </BlurFade>
       </div>
 
-      <BlurFade delay={0.25 * 2.5} inView>
+      <BlurFade delay={0.25 * 1} inView>
         <div className="w-[95%] sm:w-[80%] mb-15 mx-auto ">
           {activeTag !== "all links" && filteredLinks.length === 0 ? (
             <h1 className="text-center text-lg font-semibold text-gray-500 dark:text-neutral-400 mt-10">
-              😕 No Links Found for, Add your first link.
+              😕 No Links Found, Add your first link.
             </h1>
           ) : (
             filteredLinks.map((link) => {
               return (
-                <BlurFade delay={0.25 * 2.7} inView key={link.id}>
+                <BlurFade delay={0.25} inView key={link.id}>
                   <LinkCard key={link.id} link={link} />
                 </BlurFade>
               );

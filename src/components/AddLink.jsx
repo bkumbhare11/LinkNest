@@ -58,7 +58,7 @@ function AddLink() {
       month: "short",
       day: "2-digit",
     });
-    const isoDate = date.toISOString().split("T")[0];
+    const isoDate = date.toISOString();
     console.log(isoDate);
     console.log(formattedDate);
 

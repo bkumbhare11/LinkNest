@@ -39,11 +39,11 @@ function Favourite() {
         </h1>
       </div>
 
-      <BlurFade delay={0.25 * 2} inView>
+      <BlurFade delay={0.25} inView>
         <div className="w-[95%] sm:w-[80%] mb-15 mx-auto">
           {favouriteLink.length == 0 ? (
             <h1 className="text-center text-lg font-semibold text-gray-500 dark:text-neutral-400 mt-10">
-              😕 No Links Found for, Add your first link.
+              😕 No Links Found, Add your first link.
             </h1>
           ) : (
             favouriteLink.map((link) => <LinkCard key={link.id} link={link} />)
