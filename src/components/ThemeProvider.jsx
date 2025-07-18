@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeProviderContext = createContext({
   theme: "system",
   setTheme: () => {},
-  isMounted: false,
 });
 
 export function ThemeProvider({
@@ -12,17 +11,13 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }) {
-  const [theme, setThemeState] = useState(defaultTheme);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    const storedTheme = localStorage.getItem(storageKey) || defaultTheme;
-    setThemeState(storedTheme);
-    setIsMounted(true);
-  }, []);
+  const [theme, setThemeState] = useState(() => {
+    return localStorage.getItem(storageKey) || defaultTheme;
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
+
     root.classList.remove("light", "dark");
 
     if (theme === "system") {
@@ -44,7 +39,6 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme,
-    isMounted,
   };
 
   return (
