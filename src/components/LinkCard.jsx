@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toggleFavourite, deleteLink } from "@/redux/linkSlice";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
@@ -10,6 +9,7 @@ import { IoMdPricetags } from "react-icons/io";
 import { LuNotebookPen } from "react-icons/lu";
 import UpdateLink from "@/components/UpdateLink";
 import toast from "react-hot-toast";
+import DeleteLink from "./DeleteLink";
 
 function LinkCard({ link }) {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function LinkCard({ link }) {
           toast("Added to favourite", {
             style: {
               background: "#facc15",
-              text: "#000000",
+              color: "#000000",
             },
             icon: "⭐️",
             duration: 2000,
@@ -37,8 +37,8 @@ function LinkCard({ link }) {
         } else {
           toast("Removed from favourite", {
             style: {
-              background: "#38bdf8", // Tailwind: sky-400
-              text: "#000000",
+              background: "#38bdf8",
+              color: "#000000",
             },
             icon: "🚫",
             duration: 2000,
@@ -49,18 +49,15 @@ function LinkCard({ link }) {
 
   function handleDelete(id) {
     axios.delete(`${url}link/${id}.json`).then(() => {
-      const confirmation = confirm("Are you sure want to delete this link");
-      if (confirmation) {
-        dispatch(deleteLink(id));
-        console.log("Link Deleted");
-        toast.error("Link Deleted Successfully", {
-          style: {
-            background: "#ef4444", // Tailwind: red-500
-            text: "#ffffff",
-          },
-          duration: 2000,
-        });
-      }
+      dispatch(deleteLink(id));
+      console.log("Link Deleted");
+      toast.error("Link Deleted Successfully", {
+        style: {
+          background: "#ef4444",
+          color: "#ffffff",
+        },
+        duration: 2000,
+      });
     });
   }
 
@@ -119,12 +116,13 @@ function LinkCard({ link }) {
           </div>
 
           <div className=" w-full flex justify-end ">
-            <button
+            {/* <button
               className="text-xl sm:text-2xl cursor-pointer"
               onClick={() => handleDelete(link.id)}
-            >
-              <RiDeleteBin6Line />
-            </button>
+            > */}
+            {/* <RiDeleteBin6Line /> */}
+            <DeleteLink deletefn={() => handleDelete(link.id)} />
+            {/* </button> */}
           </div>
         </div>
       </div>

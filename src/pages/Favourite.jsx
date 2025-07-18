@@ -33,11 +33,21 @@ function Favourite() {
 
   return (
     <>
+      <div className="sticky top-12 sm:top-25 z-40 bg-white/60 dark:bg-black/60 backdrop-blur-sm">
+        <h1 className="text-xl font-semibold text-center  sm:text-4xl  py-3">
+          Your Favourite Links ✨
+        </h1>
+      </div>
+
       <BlurFade delay={0.25 * 2} inView>
         <div className="w-[95%] sm:w-[80%] mb-15 mx-auto">
-          {favouriteLink.map((link) => (
-            <LinkCard key={link.id} link={link} />
-          ))}
+          {favouriteLink.length == 0 ? (
+            <h1 className="text-center text-lg font-semibold text-gray-500 dark:text-neutral-400 mt-10">
+              😕 No Links Found for, Add your first link.
+            </h1>
+          ) : (
+            favouriteLink.map((link) => <LinkCard key={link.id} link={link} />)
+          )}
         </div>
       </BlurFade>
     </>

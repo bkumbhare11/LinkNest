@@ -80,8 +80,8 @@ function Links() {
       <BlurFade delay={0.25 * 2.5} inView>
         <div className="w-[95%] sm:w-[80%] mb-15 mx-auto ">
           {activeTag !== "all links" && filteredLinks.length === 0 ? (
-            <h1 className="text-center text-lg font-semibold text-gray-500 dark:text-neutral-400 mt-5">
-              😕 No Links Found for selected tag
+            <h1 className="text-center text-lg font-semibold text-gray-500 dark:text-neutral-400 mt-10">
+              😕 No Links Found for, Add your first link.
             </h1>
           ) : (
             filteredLinks.map((link) => {

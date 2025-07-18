@@ -41,10 +41,10 @@ function AddLink() {
   let description = useRef();
 
   function handleClick() {
-    console.log(link.current.value);
-    console.log(title.current.value);
-    console.log(description.current.value);
-    console.log(selectedTag);
+    // console.log(link.current.value);
+    // console.log(title.current.value);
+    // console.log(description.current.value);
+    // console.log(selectedTag);
 
     let linkUrl = link.current.value;
     let linkTitle = title.current.value;
@@ -62,17 +62,30 @@ function AddLink() {
     console.log(isoDate);
     console.log(formattedDate);
 
-    const isDuplicate = links.some(
-      (link) =>
-        link.title.toLowerCase() == linkTitle.toLowerCase() ||
-        link.url.toLowerCase() == linkUrl.toLowerCase()
-    );
+    if (!linkUrl || !linkTitle || !linkTag) {
+      toast("All fields are required!!", {
+        style: {
+          backgroundColor: "#ef4444",
+          color: "#ffffff",
+        },
+        icon: "⚠️",
+      });
+      return;
+    }
+
+    const isDuplicate = links
+      .filter((link) => link.createdBy == user.username)
+      .some(
+        (link) =>
+          link.title.toLowerCase() == linkTitle.toLowerCase() ||
+          link.url.toLowerCase() == linkUrl.toLowerCase()
+      );
 
     if (isDuplicate) {
       toast("Url or Title already exists", {
         style: {
           background: "#f97316", // Tailwind: orange-500
-          text: "#ffffff",
+          color: "#ffffff",
         },
       });
     } else {
@@ -106,18 +119,17 @@ function AddLink() {
           toast.success("Link Added Successfully", {
             style: {
               background: "#22c55e", // Tailwind: green-500
-              text: "#ffffff",
+              color: "#ffffff",
             },
             duration: 2000,
           });
+          link.current.value = "";
+          title.current.value = "";
+          description.current.value = "";
         })
         .catch((err) => {
           console.log("Error while posting link: ", err);
         });
-
-      link.current.value = "";
-      title.current.value = "";
-      description.current.value = "";
     }
   }
 
@@ -202,9 +214,8 @@ function AddLink() {
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
-              <DialogClose asChild>
-                <Button onClick={handleClick}>Save Link</Button>
-              </DialogClose>
+
+              <Button onClick={handleClick}>Save Link</Button>
             </DialogFooter>
           </DialogContent>
         </form>
