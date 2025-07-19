@@ -3,7 +3,7 @@ import { MdNightlightRound } from "react-icons/md";
 import { FaSun } from "react-icons/fa";
 
 function ThemeToggle() {
-  const { theme, setTheme, isMounted } = useTheme();
+  const { theme, setTheme } = useTheme();
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
