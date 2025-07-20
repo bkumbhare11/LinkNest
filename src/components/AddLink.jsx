@@ -140,6 +140,7 @@ function AddLink() {
           link.current.value = "";
           title.current.value = "";
           description.current.value = "";
+          setSelectedTag("");
         })
         .catch((err) => {
           console.log("Error while posting link: ", err);
@@ -205,7 +206,10 @@ function AddLink() {
               </div>
 
               <div className="grid gap-3">
-                <Select onValueChange={(value) => setSelectedTag(value)}>
+                <Select
+                  value={selectedTag}
+                  onValueChange={(value) => setSelectedTag(value)}
+                >
                   <SelectTrigger className="w-full ">
                     <SelectValue placeholder="Tags" />
                   </SelectTrigger>
