@@ -40,7 +40,7 @@ function AddLink() {
   let title = useRef();
   let description = useRef();
 
-  function isValidURL() {
+  function isValidURL(linkUrl) {
     try {
       new URL(linkUrl);
       return true;
@@ -50,11 +50,6 @@ function AddLink() {
   }
 
   function handleClick() {
-    // console.log(link.current.value);
-    // console.log(title.current.value);
-    // console.log(description.current.value);
-    // console.log(selectedTag);
-
     let linkUrl = link.current.value;
     let linkTitle = title.current.value;
     let desc = description.current.value;
